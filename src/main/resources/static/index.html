@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Café Feedback – Client</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #d0bcbc;
+            color: #000;
+            font-family: Arial, sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .star-rating {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+            gap: 5px;
+            font-size: 36px;
+        }
+
+        .star-rating input[type="radio"] {
+            display: none;
+        }
+
+        .star-rating label {
+            color: #9CA3AF;
+            cursor: pointer;
+            transition: color 0.3s, text-shadow 0.3s;
+            user-select: none;
+        }
+
+        .star-rating label:hover,
+        .star-rating label.hovered {
+            color: #ffcc00;
+            text-shadow: 0 0 8px rgba(112, 65, 3, 0.7);
+        }
+
+        .star-rating label.selected {
+            color: #F59E0B;
+            text-shadow: 0 0 6px rgba(245, 158, 11, 0.6);
+        }
+
+        #captchaContainer {
+            background-color: #3e2723;
+            border-radius: 6px;
+            padding: 8px;
+            text-align: center;
+            font-family: monospace;
+            letter-spacing: 4px;
+            color: #f5e1c1;
+            font-weight: bold;
+        }
+
+        #confirmationMessage {
+            z-index: 999;
+        }
+
+        .language-switcher button {
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .language-switcher button:hover {
+            background-color: #b45309;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="clientView" class="container mx-auto px-4 py-8 max-w-md">
+        <!-- Langues -->
+        <div class="language-switcher mb-4 flex justify-end gap-2">
+            <button type="button" onclick="setLanguage('fr')"
+                class="px-3 py-1 rounded bg-amber-700 text-white">FR</button>
+            <button type="button" onclick="setLanguage('en')"
+                class="px-3 py-1 rounded bg-amber-700 text-white">EN</button>
+            <button type="button" onclick="setLanguage('ar')"
+                class="px-3 py-1 rounded bg-amber-700 text-white">AR</button>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between mb-6">
+                <h1 id="titleForm" class="text-2xl font-bold text-gray-800"></h1>
+                <div class="w-12 h-12 bg-amber-700 rounded-full flex items-center justify-center">
+                    <i class="fas fa-coffee text-white text-xl"></i>
+                </div>
+            </div>
+            <p id="subtitleForm" class="text-gray-600 mb-6"></p>
+
+            <form id="feedbackForm" class="space-y-6">
+                <input type="hidden" id="tableNumber" value="12" />
+
+                <!-- Étoiles -->
+                <div>
+                    <label id="ratingLabel" class="block text-gray-700 font-medium mb-2"></label>
+                    <div class="star-rating">
+                        <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
+                        <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
+                        <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+                        <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
+                        <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+                    </div>
+                </div>
+
+                <!-- Commentaire -->
+                <div>
+                    <label id="commentLabel" for="comment" class="block text-gray-700 font-medium mb-2"></label>
+                    <textarea id="comment" rows="4"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"></textarea>
+                </div>
+
+                <!-- Nom -->
+                <div>
+                    <label id="nameLabel" for="name" class="block text-gray-700 font-medium mb-2"></label>
+                    <input type="text" id="name"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500">
+                </div>
+
+                <!-- Captcha -->
+                <div>
+                    <label id="captchaLabel" class="block text-gray-700 font-medium mb-2"></label>
+                    <div id="captchaContainer" class="captcha-container p-4 mb-2 flex justify-center items-center">
+                        <span id="captchaText"></span>
+                    </div>
+                    <input type="text" id="captchaInput"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500">
+                </div>
+
+                <div id="privacyText" class="text-xs text-gray-500 mb-4"></div>
+                <button type="submit" id="submitBtn"
+                    class="w-full bg-amber-700 text-white py-3 px-4 rounded-md hover:bg-amber-800 transition duration-300 font-medium"></button>
+            </form>
+        </div>
+
+        <!-- Message confirmation -->
+        <div id="confirmationMessage"
+            class="hidden fixed top-4 left-0 right-0 mx-auto w-5/6 max-w-md bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded shadow-md">
+            <div class="flex items-center">
+                <div class="py-1"><i class="fas fa-check-circle text-green-500 mr-3"></i></div>
+                <div>
+                    <p id="thankText" class="font-bold"></p>
+                    <p id="helpText" class="text-sm"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            fr: { title: "Votre avis nous intéresse", subtitle: "Merci de prendre quelques instants pour évaluer votre expérience.", ratingLabel: "Comment évaluez-vous votre expérience ?", commentLabel: "Commentaire (optionnel)", nameLabel: "Votre prénom (optionnel)", captchaLabel: "Vérification anti-spam", privacyText: "En soumettant ce formulaire, vous acceptez notre politique de confidentialité.", submitBtn: "Envoyer mon avis", thankYou: "Merci pour votre avis !", helpText: "Votre feedback nous aide à améliorer notre service." },
+            en: { title: "We value your feedback", subtitle: "Please take a moment to rate your experience.", ratingLabel: "How would you rate your experience?", commentLabel: "Comment (optional)", nameLabel: "Your first name (optional)", captchaLabel: "Anti-spam verification", privacyText: "By submitting this form, you agree to our privacy policy.", submitBtn: "Submit my feedback", thankYou: "Thank you for your feedback!", helpText: "Your feedback helps us improve our service." },
+            ar: { title: "رأيك يهمنا", subtitle: "يرجى تخصيص بعض الوقت لتقييم تجربتك.", ratingLabel: "كيف تقيم تجربتك؟", commentLabel: "تعليق (اختياري)", nameLabel: "اسمك الأول (اختياري)", captchaLabel: "التحقق من مكافحة البريد المزعج", privacyText: "بإرسال هذا النموذج، فإنك توافق على سياسة الخصوصية الخاصة بنا.", submitBtn: "إرسال رأيي", thankYou: "شكراً لملاحظتك!", helpText: "ملاحظاتك تساعدنا على تحسين خدمتنا." }
+        };
+
+        function setLanguage(lang) {
+            document.getElementById("titleForm").textContent = translations[lang].title;
+            document.getElementById("subtitleForm").textContent = translations[lang].subtitle;
+            document.getElementById("ratingLabel").textContent = translations[lang].ratingLabel;
+            document.getElementById("commentLabel").textContent = translations[lang].commentLabel;
+            document.getElementById("nameLabel").textContent = translations[lang].nameLabel;
+            document.getElementById("captchaLabel").textContent = translations[lang].captchaLabel;
+            document.getElementById("privacyText").textContent = translations[lang].privacyText;
+            document.getElementById("submitBtn").textContent = translations[lang].submitBtn;
+            document.getElementById("thankText").textContent = translations[lang].thankYou;
+            document.getElementById("helpText").textContent = translations[lang].helpText;
+
+            if (lang === "ar") { document.body.dir = "rtl"; document.body.style.textAlign = "right"; }
+            else { document.body.dir = "ltr"; document.body.style.textAlign = "left"; }
+        }
+        setLanguage('fr');
+
+        // ===== Captcha =====
+        const captchaTextEl = document.getElementById("captchaText");
+        const captchaInput = document.getElementById("captchaInput");
+        const form = document.getElementById("feedbackForm");
+        const confirmationMessage = document.getElementById("confirmationMessage");
+
+        function generateCaptcha() {
+            const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+            let captcha = "";
+            for (let i = 0; i < 5; i++) captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+            captchaTextEl.textContent = captcha;
+        }
+        generateCaptcha();
+
+        // ===== Étoiles =====
+        const starLabels = document.querySelectorAll(".star-rating label");
+        const starRadios = document.querySelectorAll(".star-rating input[name='rating']");
+        function paintStars(selectedValue) {
+            starLabels.forEach(label => {
+                const starValue = parseInt(label.htmlFor.replace("star", ""), 10);
+                if (starValue <= selectedValue) label.classList.add("selected");
+                else label.classList.remove("selected");
+            });
+        }
+        starLabels.forEach(label => {
+            const starValue = parseInt(label.htmlFor.replace("star", ""), 10);
+            label.addEventListener("mouseenter", () => {
+                starLabels.forEach(l => l.classList.remove("hovered"));
+                starLabels.forEach(l => {
+                    const v = parseInt(l.htmlFor.replace("star", ""), 10);
+                    if (v <= starValue) l.classList.add("hovered");
+                });
+            });
+            label.addEventListener("mouseleave", () => { starLabels.forEach(l => l.classList.remove("hovered")); });
+        });
+        starRadios.forEach(radio => { radio.addEventListener("change", () => paintStars(parseInt(radio.value))); });
+        paintStars(parseInt(document.querySelector('input[name="rating"]:checked')?.value || 0));
+
+        // ===== Soumission =====
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const rating = document.querySelector('input[name="rating"]:checked');
+            if (!rating) { alert("Veuillez sélectionner une note !"); return; }
+            if (captchaInput.value.trim().toUpperCase() !== captchaTextEl.textContent) { alert("Code anti-spam incorrect !"); generateCaptcha(); captchaInput.value = ""; return; }
+
+            const payload = {
+                numeroTable: document.getElementById("tableNumber").value,
+                note: parseInt(rating.value),
+                commentaire: document.getElementById("comment").value,
+                nom: document.getElementById("name").value
+            };
+
+            fetch("/api/avis", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            })
+                .then(response => {
+                    if (!response.ok) throw new Error("Erreur HTTP " + response.status);
+                    return response.json();
+                })
+                .then(data => {
+                    console.log("Avis envoyé :", data);
+                    confirmationMessage.classList.remove("hidden");
+                    setTimeout(() => confirmationMessage.classList.add("hidden"), 3000);
+                    form.reset();
+                    generateCaptcha();
+                    paintStars(0);
+                })
+                .catch(error => {
+                    console.error("Erreur :", error);
+                    alert("Impossible d'envoyer votre avis. Vérifiez que l'API est bien démarrée et le CORS configuré.");
+                });
+        });
+    </script>   
+</body>
+</html>

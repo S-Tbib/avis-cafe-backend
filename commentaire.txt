@@ -1,0 +1,91 @@
+1
+
+✅ Connexion à la base MySQL réussie :
+com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Start completed.
+✅ Hibernate a bien démarré :
+Initialized JPA EntityManagerFactory for persistence unit 'default'
+✅ Tomcat lancé sur le port 8080 :
+Tomcat started on port 8080 (http)
+
+
+
+
+
+
+2
+
+AvisRepository
+AvisController
+AvisService
+:
+
+🔷 1. AvisRepository.java
+📂 Couche : Accès aux données (DAO / Repository)
+🔧 Rôle :
+Interagir directement avec la base de données.
+
+✅ Ce qu’il fait :
+Étend JpaRepository<Avis, Long>, ce qui fournit automatiquement des méthodes comme :
+
+save() → pour insérer ou mettre à jour un avis
+
+findAll() → pour récupérer tous les avis
+
+findById() → pour un avis spécifique
+
+deleteById() → pour supprimer un avis
+
+Tu n’écris pas de SQL, c’est Spring qui s’en occupe.
+
+🔷 2. AvisService.java
+📂 Couche : Service (Logique métier)
+🔧 Rôle :
+Contient la logique métier (ce que ton application fait) et coordonne les actions entre le contrôleur et le repository.
+
+✅ Ce qu’il fait :
+Utilise le repository pour ajouter un avis ou récupérer la liste des avis.
+
+C’est ici que tu pourrais plus tard :
+
+Ajouter des règles métier (ex : bloquer les avis avec note > 5)
+
+Ajouter des logs, vérifications, appels externes, etc.
+
+🔷 3. AvisController.java
+📂 Couche : Contrôleur (API REST)
+🔧 Rôle :
+Gérer les requêtes HTTP venant du navigateur, mobile ou autre frontend.
+
+✅ Ce qu’il fait :
+Reçoit les appels comme :
+
+POST /api/avis/ajouter → pour créer un avis
+
+GET /api/avis/tous → pour afficher les avis
+
+Appelle les méthodes de AvisService pour exécuter la logique.
+
+🧠 Résumé visuel de l'architecture
+scss
+Copy
+Edit
+Utilisateur (navigateur/mobile)
+        │
+        ▼
+🟦 AvisController (REST API)
+        │
+        ▼
+🟩 AvisService (Logique métier)
+        │
+        ▼
+🟨 AvisRepository (Accès base de données)
+        │
+        ▼
+🗄️  Base de données (MySQL)
+
+
+
+
+✅ Étape suivante : Configurer la connexion à MySQL
+Tu dois connecter ton projet Spring Boot à une base de données MySQL pour stocker les avis des clients.
+
