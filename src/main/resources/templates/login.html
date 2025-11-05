@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login - AvisClient</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; background: #f4f6f9; }
+    .container { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.1); width: 100%; max-width: 420px; text-align: center; }
+    .tabs { display: flex; margin-bottom: 20px; border-bottom: 1px solid #ddd; }
+    .tabs a { flex: 1; padding: 12px 0; text-decoration: none; color: #555; font-weight: 600; }
+    .tabs a.active { color: #007bff; border-bottom: 3px solid #007bff; }
+    input[type="email"], input[type="password"] { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; margin-bottom: 15px; box-sizing: border-box; }
+    button { width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 6px; cursor: pointer; }
+    button:hover { background: #0056b3; }
+    .error { color: red; margin: 10px 0; }
+    .link { color: #007bff; text-decoration: none; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="tabs">
+    <a href="/login" class="active">Login</a>
+    <a href="/register">Create Account</a>
+  </div>
+
+  <h2>Admin Access</h2>
+
+  <form action="/login" method="post">
+    <div>
+      <input type="email" name="email" placeholder="Email" required />
+    </div>
+    <div>
+      <input type="password" name="password" placeholder="Password" required />
+    </div>
+    <button type="submit">Log In</button>
+  </form>
+
+  <div th:if="${error}" class="error" th:text="${error}"></div>
+  <a href="/register" class="link">→ Create an account</a>
+</div>
+</body>
+</html>

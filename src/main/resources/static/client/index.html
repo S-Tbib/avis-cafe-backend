@@ -65,6 +65,7 @@
         }
 
         .language-switcher button:hover {
+
             background-color: #b45309;
             transform: scale(1.05);
         }
@@ -220,13 +221,14 @@
             if (captchaInput.value.trim().toUpperCase() !== captchaTextEl.textContent) { alert("Code anti-spam incorrect !"); generateCaptcha(); captchaInput.value = ""; return; }
 
             const payload = {
-                numeroTable: document.getElementById("tableNumber").value,
-                note: parseInt(rating.value),
-                commentaire: document.getElementById("comment").value,
-                nom: document.getElementById("name").value
+                tableNumber: document.getElementById("tableNumber").value,
+                rating: parseInt(rating.value),
+                comment: document.getElementById("comment").value,
+                name: document.getElementById("name").value,
+                date: new Date().toISOString()
             };
 
-            fetch("/api/avis", {
+            fetch("/api/feedback", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload)
@@ -248,6 +250,7 @@
                     alert("Impossible d'envoyer votre avis. Vérifiez que l'API est bien démarrée et le CORS configuré.");
                 });
         });
-    </script>   
+    </script>
 </body>
+
 </html>

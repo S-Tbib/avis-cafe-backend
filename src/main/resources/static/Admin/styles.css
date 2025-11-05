@@ -192,50 +192,294 @@ body {
 }
 
 /* ==================== */
-/* 6. ONGLETS           */
+/* DISTRIBUTION DES NOTES - STYLE AMÉLIORÉ */
 /* ==================== */
-.tabs-container {
-    background-color: white;
-    border-radius: 0.5rem;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-    margin-bottom: 1.5rem;
-    border: 1px solid var(--gray-200);
-}
-
-.tabs-header {
-    border-bottom: 1px solid var(--gray-200);
-    display: flex;
-}
-
-.tab-btn {
-    padding: 0.75rem 1.5rem;
-    font-weight: 500;
-    color: var(--gray-500);
-    border-bottom: 2px solid transparent;
-    transition: all 0.2s ease;
-    cursor: pointer;
+.rating-distribution-item {
     display: flex;
     align-items: center;
+    gap: 1rem;
+}
+
+.rating-stars {
+    width: 100px;
+    display: flex;
+    gap: 2px;
+}
+
+.rating-bar-container {
+    flex: 1;
+    height: 8px;
+    background-color: var(--gray-200);
+    border-radius: 9999px;
+    overflow: hidden;
+}
+
+.rating-bar-fill {
+    height: 100%;
+    border-radius: 9999px;
+    transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.rating-percentage {
+    width: 40px;
+    text-align: right;
+    font-weight: 600;
+    color: var(--gray-800);
+    font-size: 0.875rem;
+}
+
+/* Couleurs par note */
+.rating-5 .rating-bar-fill {
+    background-color: #10b981;
+}
+
+/* vert */
+.rating-4 .rating-bar-fill {
+    background-color: #3b82f6;
+}
+
+/* bleu */
+.rating-3 .rating-bar-fill {
+    background-color: #f59e0b;
+}
+
+/* jaune/orange */
+.rating-2 .rating-bar-fill {
+    background-color: #f97316;
+}
+
+/* orange foncé */
+.rating-1 .rating-bar-fill {
+    background-color: #ef4444;
+}
+
+/* rouge */
+/* ==================== */
+/* DISTRIBUTION DES NOTES */
+/* ==================== */
+
+#ratingDistribution {
+    padding: 0.5rem 0;
+}
+
+#ratingDistribution>div {
+    display: flex;
+    flex-direction: column;
     gap: 0.5rem;
 }
 
-.tab-btn:hover {
+.rating-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.rating-label {
+    width: 60px;
+    font-weight: 500;
     color: var(--gray-700);
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
 }
 
-.tab-btn.active {
-    border-bottom-color: var(--primary-color);
-    color: var(--gray-800);
+.rating-stars {
+    color: var(--gray-400);
+    font-size: 0.875rem;
+}
+
+.rating-percentage {
+    min-width: 40px;
+    text-align: right;
     font-weight: 600;
+    color: var(--gray-800);
 }
 
-.tab-alert-count {
-    background-color: var(--danger-color);
-    color: white;
+.rating-bar-container {
+    flex: 1;
+    height: 8px;
+    background-color: var(--gray-200);
     border-radius: 9999px;
-    padding: 0 0.5rem;
-    font-size: 0.75rem;
-    margin-left: 0.25rem;
+    overflow: hidden;
+}
+
+.rating-bar-fill {
+    height: 100%;
+    border-radius: 9999px;
+    transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Couleurs par note */
+.rating-5 .rating-bar-fill {
+    background-color: #10b981;
+}
+
+/* vert */
+.rating-4 .rating-bar-fill {
+    background-color: #3b82f6;
+}
+
+/* bleu */
+.rating-3 .rating-bar-fill {
+    background-color: #f59e0b;
+}
+
+/* jaune/orange */
+.rating-2 .rating-bar-fill {
+    background-color: #f97316;
+}
+
+/* orange foncé */
+.rating-1 .rating-bar-fill {
+    background-color: #ef4444;
+}
+
+/* rouge */
+
+/* ==================== */
+/* TABLEAUX DE DONNÉES —  */
+/* ==================== */
+
+.data-table-container {
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--gray-200);
+    transition: box-shadow 0.3s ease;
+}
+
+.data-table-container:hover {
+    box-shadow: 0 6px 20px -4px rgba(0, 0, 0, 0.08);
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.925rem;
+    color: var(--gray-800);
+}
+
+.data-table th {
+    font-weight: 600;
+    color: var(--gray-700);
+    padding: 0.875rem 1rem;
+    text-align: left;
+    background-color: var(--gray-50);
+    font-size: 0.8125rem;
+    /* 13px */
+    text-transform: uppercase;
+    letter-spacing: 0.75px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.data-table td {
+    padding: 0.875rem 1rem;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--gray-100);
+    transition: background-color 0.15s ease;
+}
+
+.data-table tr:last-child td {
+    border-bottom: none;
+}
+
+.data-table tr:hover {
+    background-color: #fdfcfb;
+    /* Crème café très douce */
+}
+
+/* === Actions (icônes) === */
+.data-table-actions {
+    display: flex;
+    gap: 0.625rem;
+    justify-content: flex-start;
+}
+
+.data-table-action-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background-color: var(--gray-100);
+    color: var(--gray-600);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid transparent;
+    font-size: 0.9rem;
+}
+
+.data-table-action-btn:hover {
+    background-color: white;
+    border-color: var(--gray-300);
+    color: var(--gray-800);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.data-table-delete-btn {
+    background-color: #fef2f2;
+    color: #ef4444;
+    border-color: #fecaca;
+}
+
+.data-table-delete-btn:hover {
+    background-color: #fee2e2;
+    border-color: #fca5a5;
+    color: #b91c1c;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}
+
+/* === Responsive : mobile & tablette === */
+@media (max-width: 768px) {
+
+    .data-table th,
+    .data-table td {
+        padding: 0.75rem 0.75rem;
+        font-size: 0.875rem;
+    }
+
+    .data-table th {
+        font-size: 0.75rem;
+        letter-spacing: 0.5px;
+    }
+
+    .data-table-action-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 0.85rem;
+    }
+
+    /* Amélioration pour les petits écrans : éviter le débordement */
+    .data-table-container {
+        margin: 0 -1rem 1.5rem;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+    }
+
+    .main-content {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+/* === Éléments spécifiques pour "Performance par table" === */
+#tablePerformanceBody tr td:first-child {
+    font-weight: 600;
+    color: var(--gray-900);
+}
+
+#tablePerformanceBody tr td:nth-child(2) {
+    color: var(--gray-600);
+    font-weight: 500;
+}
+
+#tablePerformanceBody .fas {
+    font-size: 0.9rem;
 }
 
 /* ==================== */
@@ -393,9 +637,7 @@ body {
     background-color: #fee2e2;
 }
 
-/* ==================== */
-/* 10. PAGINATION       */
-/* ==================== */
+/* Conteneur principal */
 .pagination-container {
     display: flex;
     justify-content: space-between;
@@ -412,11 +654,6 @@ body {
     color: var(--gray-500);
 }
 
-.pagination {
-    display: flex;
-    gap: 0.25rem;
-}
-
 .pagination-btn {
     width: 2.25rem;
     height: 2.25rem;
@@ -429,190 +666,108 @@ body {
     transition: all 0.2s ease;
 }
 
-.pagination-btn:hover:not([disabled]) {
-    background-color: var(--gray-100);
-    cursor: pointer;
-}
-
 .pagination-btn.active {
     background-color: var(--primary-color);
     color: white;
     border-color: var(--primary-color);
 }
 
-.pagination-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+.pagination-btn:hover:not([disabled]) {
+    background-color: var(--gray-100);
+    cursor: pointer;
 }
 
-/* ==================== */
-/* 11. ÉVOLUTION HEBDOMADAIRE */
-/* ==================== */
-.trend-container {
-    background-color: white;
-    border-radius: 0.5rem;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-    padding: 1.25rem;
-    margin-bottom: 1.5rem;
-    border: 1px solid var(--gray-200);
-}
-
-.trend-header {
+/* --------------------- */
+#paginationNumbers {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
-}
-
-.trend-chart-container {
-    position: relative;
-    height: 250px;
-    width: 100%;
-}
-
-.trend-y-axis {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 85%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 0 5px;
-}
-
-.trend-y-axis-label {
-    font-size: 0.75rem;
-    color: var(--gray-500);
-    text-align: right;
-}
-
-.trend-chart {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 85%;
-}
-
-.trend-x-axis {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 15%;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 15px;
-}
-
-.trend-x-axis-label {
-    font-size: 0.75rem;
-    color: var(--gray-500);
-    text-align: center;
-    width: 14.28%;
-}
-
-.trend-bar-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-    height: 100%;
-    padding: 0 2px;
-}
-
-.trend-rating-bar {
-    width: 100%;
-    border-radius: 4px 4px 0 0;
-    z-index: 2;
-    position: relative;
-    transition: height 0.3s ease;
-}
-
-.trend-feedback-bar {
-    width: 50%;
-    margin: 0 auto;
-    border-radius: 0 0 4px 4px;
-    z-index: 1;
-    margin-top: -2px;
-    transition: height 0.3s ease;
-}
-
-.trend-tooltip {
-    position: absolute;
-    top: -35px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: var(--gray-800);
-    color: white;
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.25rem;
-    font-size: 0.75rem;
-    white-space: nowrap;
-    z-index: 10;
-    display: none;
-}
-
-.trend-legend {
-    display: flex;
+    gap: 8px;
     justify-content: center;
-    margin-top: 15px;
-    flex-wrap: wrap;
-    gap: 1rem;
+    margin-top: 2px;
+    padding: 8px 12px;
+    background: rgb(173, 101, 0);
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e5e5;
 }
 
-.trend-legend-item {
+/* Boutons de page */
+#paginationNumbers button {
+    min-width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
-    font-size: 0.875rem;
-}
-
-.trend-legend-color {
-    width: 15px;
-    height: 15px;
-    border-radius: 3px;
-    margin-right: 5px;
-}
-
-.trend-analysis {
-    background-color: var(--gray-50);
-    border-radius: 0.5rem;
-    padding: 0.75rem;
-    margin-top: 1rem;
-}
-
-.trend-analysis-header {
-    font-weight: 600;
-    color: var(--gray-800);
-    margin-bottom: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.trend-analysis-item {
-    margin-bottom: 0.5rem;
-}
-
-.trend-analysis-label {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 0.25rem;
-    font-size: 0.875rem;
-}
-
-.trend-analysis-bar {
-    width: 100%;
-    height: 0.5rem;
-    background-color: var(--gray-200);
-    border-radius: 9999px;
+    justify-content: center;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #4B5563;
+    background: white;
+    border: 1px solid #D1D5DB;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
     overflow: hidden;
 }
 
-.trend-analysis-bar-fill {
-    height: 100%;
-    border-radius: 9999px;
+/* Hover : effet de fond et léger agrandissement */
+#paginationNumbers button:hover:not(:disabled) {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 14px rgba(251, 146, 60, 0.15);
+    border-color: #FB923C;
+    color: #FB923C;
+    z-index: 10;
+}
+
+/* Bouton actif (page courante) */
+#paginationNumbers button.bg-amber-700 {
+    background: #FB923C;
+    border-color: #FB923C;
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(251, 146, 60, 0.25);
+}
+
+/* Effet de rebond doux quand on clique */
+#paginationNumbers button:active {
+    transform: translateY(0) scale(0.98);
+    transition: transform 0.1s ease;
+}
+
+/* Boutons Précédent / Suivant */
+#paginationNumbers button[disabled] {
+    opacity: 0.4;
+    cursor: not-allowed;
+    color: #9CA3AF;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* Style des points de suspension */
+#paginationNumbers span {
+    color: #9CA3AF;
+    font-size: 0.95rem;
+    font-weight: 500;
+    user-select: none;
+    padding: 0 4px;
+}
+
+/* Responsive : adaptation sur petits écrans */
+@media (max-width: 640px) {
+    #paginationNumbers {
+        gap: 4px;
+        padding: 6px 8px;
+        flex-wrap: wrap;
+    }
+
+    #paginationNumbers button {
+        min-width: 36px;
+        height: 36px;
+        font-size: 0.85rem;
+    }
+
+    #paginationNumbers span {
+        font-size: 0.85rem;
+    }
 }
 
 /* ==================== */
@@ -894,21 +1049,24 @@ body {
 }
 
 @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* ==================== */
 /* 16. RESPONSIVE DESIGN */
 /* ==================== */
+
 @media (max-width: 1024px) {
     .stats-grid {
         grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     }
-    
+
     .trend-container {
         flex-direction: column;
     }
-    
+
     .trend-chart-container {
         height: 200px;
     }
@@ -918,35 +1076,35 @@ body {
     .navbar {
         padding: 0.5rem 1rem;
     }
-    
+
     .navbar-brand-text {
         display: none;
     }
-    
+
     .navbar-user-name {
         display: inline;
     }
-    
+
     .stats-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .filters-container {
         flex-direction: column;
     }
-    
+
     .trend-container {
         padding: 1rem;
     }
-    
+
     .trend-chart-container {
         height: 180px;
     }
-    
+
     .trend-analysis {
         margin-top: 1rem;
     }
-    
+
     .keywords-grid {
         grid-template-columns: 1fr;
     }
@@ -956,13 +1114,13 @@ body {
     .pagination {
         gap: 0;
     }
-    
+
     .pagination-btn {
         width: 1.75rem;
         height: 1.75rem;
         font-size: 0.75rem;
     }
-    
+
     .trend-x-axis-label {
         font-size: 0.65rem;
     }

@@ -1,5 +1,6 @@
 package com.moncafe.avisclients;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
@@ -13,12 +14,10 @@ public class AvisclientsApplication {
     public static void main(String[] args) {
         SpringApplication.run(AvisclientsApplication.class, args);
     }
+
     @Bean
-public Jackson2ObjectMapperBuilderCustomizer jsonCustomizer() {
-    return builder -> builder.modules(new JavaTimeModule());
-}
+    public Jackson2ObjectMapperBuilderCustomizer jsonCustomizer() {
+        return builder -> builder.modules(new JavaTimeModule());
+    }
 
 }
-
-
-

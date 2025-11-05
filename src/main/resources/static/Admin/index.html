@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tableau de bord - Café Feedback</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css  ">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js  "></script>
+
 </head>
+
 <body>
     <!-- Vue admin - Tableau de bord -->
     <div id="adminView" class="container mx-auto px-4 py-8">
@@ -29,7 +33,7 @@
                 </div>
             </div>
         </nav>
-        
+
         <div class="main-content">
             <!-- Stats Cards -->
             <div class="stats-grid">
@@ -43,7 +47,7 @@
                         En attente de données
                     </div>
                 </div>
-                
+
                 <div class="stat-card">
                     <div class="stat-card-icon stat-card-icon-green">
                         <i class="fas fa-comments text-green-500"></i>
@@ -54,7 +58,7 @@
                         En attente de données
                     </div>
                 </div>
-                
+
                 <div class="stat-card">
                     <div class="stat-card-icon stat-card-icon-purple">
                         <i class="fas fa-smile text-purple-500"></i>
@@ -65,7 +69,7 @@
                         En attente de données
                     </div>
                 </div>
-                
+
                 <div class="stat-card">
                     <div class="stat-card-icon stat-card-icon-purple">
                         <i class="fas fa-calendar-week text-purple-500"></i>
@@ -77,7 +81,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Onglets -->
             <div class="tabs-container">
                 <div class="tabs-header">
@@ -93,7 +97,7 @@
                     </button>
                 </div>
             </div>
-            
+
             <!-- Contenu des onglets -->
             <div id="reviews" class="tab-content active">
                 <!-- Filtres -->
@@ -124,7 +128,7 @@
                         <i class="fas fa-file-export"></i> Exporter
                     </button>
                 </div>
-                
+
                 <!-- Tableau des avis -->
                 <div class="data-table-container">
                     <div class="overflow-x-auto">
@@ -150,18 +154,22 @@
                         </table>
                     </div>
                 </div>
-                
+
                 <!-- Pagination -->
                 <div class="pagination-container">
                     <div class="pagination-info">
-                        Affichage de <span id="startCount">0</span> à <span id="endCount">0</span> sur <span id="totalCount">0</span> avis
+                        Affichage de <span id="startCount">0</span> à <span id="endCount">0</span> sur <span
+                            id="totalCount">0</span> avis
                     </div>
-                    <div class="pagination" id="paginationNumbers">
-                        <!-- Généré dynamiquement -->
+
+                    <div id="paginationNumbers" class="flex items-center space-x-1 mt-6">
+
+                        <!-- Pagination générée dynamiquement ici -->
                     </div>
                 </div>
+
             </div>
-            
+
             <div id="stats" class="tab-content">
                 <!-- Filtres -->
                 <div class="filters-container">
@@ -173,142 +181,40 @@
                         </select>
                     </div>
                 </div>
-                
                 <!-- Distribution des notes -->
                 <div class="data-table-container">
                     <div class="p-4">
                         <h3 class="text-lg font-semibold text-gray-800 mb-4">Distribution des notes</h3>
                         <div class="space-y-4" id="ratingDistribution">
-                            <div class="text-center py-8">
-                                <div class="loading-spinner mb-2"></div>
-                                <p>Chargement des statistiques...</p>
+                            <div class="text-center py-6">
+                                <div class="inline-block mb-2">
+                                    <div class="loading-spinner"></div>
+                                </div>
+                                <p class="text-gray-500 text-sm">Chargement des statistiques...</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Performance par table -->
-                <div class="data-table-container mt-6">
-                    <div class="p-4">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Performance par table</h3>
-                        <div class="overflow-x-auto">
-                            <table class="w-full">
-                                <thead>
-                                    <tr class="text-left border-b">
-                                        <th class="pb-2">Table</th>
-                                        <th class="pb-2">Nb avis</th>
-                                        <th class="pb-2">Note moyenne</th>
-                                        <th class="pb-2">Tendance</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tablePerformance">
-                                    <tr>
-                                        <td colspan="4" class="text-center py-8">
-                                            <div class="loading-spinner"></div>
-                                            <p>Chargement des performances...</p>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Évolution hebdomadaire -->
-                <div class="trend-container mt-6">
-                    <div class="trend-header">
-                        <h3 class="text-xl font-bold text-gray-800">Évolution hebdomadaire</h3>
-                        <div class="flex space-x-3">
-                            <select id="trendPeriod" class="filter-select">
-                                <option value="week">Cette semaine</option>
-                                <option value="month">Ce mois</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="flex flex-col md:flex-row">
-                        <div class="md:w-3/4">
-                            <div class="trend-chart-container">
-                                <div class="trend-y-axis">
-                                    <div class="trend-y-axis-label">5.0</div>
-                                    <div class="trend-y-axis-label">4.5</div>
-                                    <div class="trend-y-axis-label">4.0</div>
-                                    <div class="trend-y-axis-label">3.5</div>
-                                    <div class="trend-y-axis-label">3.0</div>
-                                </div>
-                                <div class="trend-chart" id="weeklyTrendChart">
-                                    <div class="text-center py-8">
-                                        <div class="loading-spinner mb-2"></div>
-                                        <p>Chargement de l'évolution...</p>
-                                    </div>
-                                </div>
-                                <div class="trend-x-axis">
-                                    <div class="trend-x-axis-label">Lun</div>
-                                    <div class="trend-x-axis-label">Mar</div>
-                                    <div class="trend-x-axis-label">Mer</div>
-                                    <div class="trend-x-axis-label">Jeu</div>
-                                    <div class="trend-x-axis-label">Ven</div>
-                                    <div class="trend-x-axis-label">Sam</div>
-                                    <div class="trend-x-axis-label">Dim</div>
-                                </div>
-                            </div>
-                            <div class="trend-legend">
-                                <div class="trend-legend-item">
-                                    <div class="trend-legend-color" style="background-color: var(--primary-color);"></div>
-                                    <span>Note moyenne</span>
-                                </div>
-                                <div class="trend-legend-item">
-                                    <div class="trend-legend-color" style="background-color: var(--success-color);"></div>
-                                    <span>Nombre d'avis</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="md:w-1/4 md:pl-6 mt-6 md:mt-0">
-                            <div class="trend-analysis">
-                                <div class="trend-analysis-header text-amber-500">
-                                    <i class="fas fa-info-circle"></i>
-                                    Analyse de la tendance
-                                </div>
-                                <div class="space-y-3">
-                                    <div class="trend-analysis-item">
-                                        <div class="trend-analysis-label">
-                                            <span>Note moyenne actuelle</span>
-                                            <span id="currentAvgRating" class="font-medium">-</span>
-                                        </div>
-                                        <div class="trend-analysis-bar">
-                                            <div id="currentAvgRatingBar" class="trend-analysis-bar-fill" style="width: 0%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="trend-analysis-item">
-                                        <div class="trend-analysis-label">
-                                            <span>Évolution vs semaine dernière</span>
-                                            <span id="weeklyTrendValue" class="text-gray-500 font-medium">-</span>
-                                        </div>
-                                        <div class="trend-analysis-bar">
-                                            <div id="weeklyTrendBar" class="trend-analysis-bar-fill" style="width: 0%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="trend-analysis-item">
-                                        <div class="trend-analysis-label">
-                                            <span>Nombre d'avis cette semaine</span>
-                                            <span id="weeklyFeedbackCount">-</span>
-                                        </div>
-                                        <div class="trend-analysis-bar">
-                                            <div id="weeklyFeedbackBar" class="trend-analysis-bar-fill" style="width: 0%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="pt-3 border-t border-gray-200">
-                                        <div class="flex items-center text-sm">
-                                            <i class="fas fa-info-circle text-amber-500 mr-2"></i>
-                                            <span id="trendAnalysis">Données en cours de chargement...</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
+                <!-- Performance par table -->
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Table</th>
+                            <th>Nb avis</th>
+                            <th>Note moyenne</th>
+                            <th>Tendance</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablePerformanceBody">
+                        <!-- lignes injectées par JS -->
+                    </tbody>
+                </table>
+                <section class="stats-section">
+                    <h2>Évolution hebdomadaire des avis</h2>
+                    <canvas id="weeklyTrendChart"></canvas>
+                </section>
                 <!-- Mots-clés fréquents -->
                 <div class="keywords-container mt-6">
                     <div class="keywords-header">
@@ -321,7 +227,6 @@
                             </select>
                         </div>
                     </div>
-                    
                     <div class="keywords-grid">
                         <!-- Catégorie Positive -->
                         <div class="keyword-category">
@@ -335,7 +240,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Catégorie Neutre -->
                         <div class="keyword-category">
                             <div class="keyword-category-header text-gray-700">
@@ -348,7 +253,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Catégorie Négative -->
                         <div class="keyword-category">
                             <div class="keyword-category-header text-red-700">
@@ -364,7 +269,8 @@
                     </div>
                 </div>
             </div>
-            
+
+
             <div id="alerts" class="tab-content">
                 <!-- Filtres -->
                 <div class="filters-container">
@@ -379,7 +285,7 @@
                         <i class="fas fa-check-double mr-1"></i> Marquer tout comme lu
                     </button>
                 </div>
-                
+
                 <!-- Alertes -->
                 <div class="alerts-container">
                     <div id="alertsContainer" class="space-y-3">
@@ -389,11 +295,14 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Pagination -->
                 <div class="pagination-container">
                     <div class="pagination-info">
-                        Affichage de <span id="startAlertCount">0</span> à <span id="endAlertCount">0</span> sur <span id="totalAlertCount">0</span> alertes
+                        Affichage de <span id="startAlertCount">0</span> à <span id="endAlertCount">0
+
+                        </span> sur
+                        <span id="totalAlertCount">0</span> alertes
                     </div>
                     <div class="pagination" id="alertPagination">
                         <!-- Généré dynamiquement -->
@@ -402,7 +311,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Modal de connexion -->
     <div id="loginModal" class="modal-overlay">
         <div class="modal-content">
@@ -429,4 +338,5 @@
     </div>
     <script src="script.js"></script>
 </body>
+
 </html>

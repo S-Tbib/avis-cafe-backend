@@ -18,12 +18,12 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth -> auth
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/avis/**").authenticated()
                 .anyRequest().permitAll()
-            )
-            .httpBasic(Customizer.withDefaults());
+                )
+                .httpBasic(Customizer.withDefaults());
 
         return http.build();
     }
@@ -31,10 +31,10 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
         UserDetails user = User.builder()
-            .username("admin")
-            .password(passwordEncoder.encode("ABCD1234"))
-            .roles("USER")
-            .build();
+                .username("admin")
+                .password(passwordEncoder.encode("ABCD1234"))
+                .roles("USER")
+                .build();
 
         return new InMemoryUserDetailsManager(user);
     }
@@ -44,5 +44,3 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 }
-
-
