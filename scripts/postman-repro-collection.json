@@ -1,0 +1,67 @@
+{
+  "info": {
+    "name": "avisclients - repro flow",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Register → Login → Post Feedback. Login request test saves token to environment variable 'jwt'."
+  },
+  "item": [
+    {
+      "name": "Register",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fullName\": \"Postman Test\",\n  \"email\": \"postman.test+{{ts}}@example.com\",\n  \"password\": \"secret123\"\n}"
+        },
+        "url": "http://localhost:8080/api/users/register"
+      },
+      "response": []
+    },
+    {
+      "name": "Login (save token)",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"postman.test+{{ts}}@example.com\",\n  \"password\": \"secret123\"\n}"
+        },
+        "url": "http://localhost:8080/api/users/login"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Save token returned by login into environment variable 'jwt'",
+              "if (pm.response.code === 200) {",
+              "  var json = pm.response.json();",
+              "  if (json.token) { pm.environment.set('jwt', json.token); pm.test('Saved token', function(){pm.expect(json.token).to.be.a('string');}); }",
+              "}"
+            ]
+          }
+        }
+      ],
+      "response": []
+    },
+    {
+      "name": "Post Feedback (uses jwt)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{jwt}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"date\": \"2025-11-13T00:00:00\",\n  \"tableNumber\": \"P1\",\n  \"rating\": 5,\n  \"name\": \"Postman\",\n  \"comment\": \"Repro test\"\n}"
+        },
+        "url": "http://localhost:8080/api/feedback"
+      },
+      "response": []
+    }
+  ]
+}

@@ -13,12 +13,10 @@ public class AvisclientsApplication {
     public static void main(String[] args) {
         SpringApplication.run(AvisclientsApplication.class, args);
     }
+
     @Bean
-public Jackson2ObjectMapperBuilderCustomizer jsonCustomizer() {
-    return builder -> builder.modules(new JavaTimeModule());
+    public Jackson2ObjectMapperBuilderCustomizer jsonCustomizer() {
+        return builder -> builder.modules(new JavaTimeModule());
+    }
+// PasswordEncoder bean is provided in SecurityConfig to avoid duplicate bean definitions
 }
-
-}
-
-
-
