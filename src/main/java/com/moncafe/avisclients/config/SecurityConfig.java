@@ -21,37 +21,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig {
 
-<<<<<<< HEAD
     @Autowired
     private JwtAuthFilter jwtAuthFilter;
 
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
-=======
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/avis/**").authenticated()
-                .anyRequest().permitAll()
-                )
-                .httpBasic(Customizer.withDefaults());
-
-        return http.build();
-    }
-
-    @Bean
-    public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
-        UserDetails user = User.builder()
-                .username("admin")
-                .password(passwordEncoder.encode("ABCD1234"))
-                .roles("USER")
-                .build();
-
-        return new InMemoryUserDetailsManager(user);
-    }
->>>>>>> cfcb295429da9ce9ba549af75919b3215a049b60
 
     @Bean
     public PasswordEncoder passwordEncoder() {

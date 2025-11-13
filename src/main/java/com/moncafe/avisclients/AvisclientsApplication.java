@@ -19,9 +19,4 @@ public class AvisclientsApplication {
     public Jackson2ObjectMapperBuilderCustomizer jsonCustomizer() {
         return builder -> builder.modules(new JavaTimeModule());
     }
-<<<<<<< HEAD
-// PasswordEncoder bean is provided in SecurityConfig to avoid duplicate bean definitions
-=======
-
->>>>>>> cfcb295429da9ce9ba549af75919b3215a049b60
 }

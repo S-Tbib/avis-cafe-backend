@@ -1,7 +1,5 @@
-    // controller/AuthController.java
 package com.moncafe.avisclients.controller;
 
-<<<<<<< HEAD
 import com.moncafe.avisclients.dto.LoginRequest;
 import com.moncafe.avisclients.dto.RegisterRequest;
 import com.moncafe.avisclients.service.UserService;
@@ -16,16 +14,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
-=======
-import java.util.HashMap;
-import java.util.Map;
-
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
->>>>>>> cfcb295429da9ce9ba549af75919b3215a049b60
 
 @RestController
 @RequestMapping("/api/users")
@@ -38,7 +26,6 @@ public class AuthController {
     @Autowired
     private JwtService jwtService;
 
-<<<<<<< HEAD
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -49,14 +36,6 @@ public class AuthController {
     public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
         if (userService.register(request)) {
             return ResponseEntity.ok(Map.of("message", "Compte créé avec succès !"));
-=======
-        if ("admin".equals(username) && "admin".equals(password)) {
-            response.put("success", true);
-            response.put("token", "123456"); // Je peut générer un token plus sécurisé ici
-        } else {
-            response.put("success", false);
-            response.put("message", "Identifiants incorrects");
->>>>>>> cfcb295429da9ce9ba549af75919b3215a049b60
         }
         return ResponseEntity.badRequest().body(Map.of("message", "Email déjà utilisé."));
     }
