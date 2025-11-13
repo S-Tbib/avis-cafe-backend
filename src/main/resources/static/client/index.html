@@ -65,6 +65,7 @@
         }
 
         .language-switcher button:hover {
+
             background-color: #b45309;
             transform: scale(1.05);
         }
@@ -225,7 +226,11 @@
                 comment: document.getElementById("comment").value,
                 name: document.getElementById("name").value,
                 date: new Date().toISOString()
+<<<<<<< HEAD
             };  
+=======
+            };
+>>>>>>> cfcb295429da9ce9ba549af75919b3215a049b60
 
             fetch("/api/feedback", {
                 method: "POST",
@@ -249,6 +254,11 @@
                     alert("Impossible d'envoyer votre avis. Vérifiez que l'API est bien démarrée et le CORS configuré.");
                 });
         });
-    </script>   
+    </script>
 </body>
+<<<<<<< HEAD
 </html>
+=======
+
+</html>
+>>>>>>> cfcb295429da9ce9ba549af75919b3215a049b60

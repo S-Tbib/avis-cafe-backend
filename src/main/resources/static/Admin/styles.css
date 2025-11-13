@@ -1,0 +1,1127 @@
+/* ==================== */
+/* 1. VARIABLES CSS     */
+/* ==================== */
+:root {
+    --primary-color: #d4a76a;
+    --primary-dark: #a87532;
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+}
+
+/* ==================== */
+/* 2. BASE ET TYPOGRAPHIE */
+/* ==================== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f5f2;
+    line-height: 1.6;
+    color: var(--gray-700);
+}
+
+/* ==================== */
+/* 3. LAYOUT PRINCIPAL  */
+/* ==================== */
+.container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.main-content {
+    padding-top: 1.5rem;
+    padding-bottom: 2rem;
+}
+
+/* ==================== */
+/* 4. NAVIGATION        */
+/* ==================== */
+.navbar {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    background-color: white;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.navbar-brand-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: white;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand-icon i {
+    color: var(--primary-dark);
+    font-size: 1.25rem;
+}
+
+.navbar-brand-text {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--gray-800);
+}
+
+.navbar-user {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.navbar-user-name {
+    display: none;
+    font-weight: 500;
+    color: var(--gray-700);
+}
+
+.navbar-logout {
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 0.375rem;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.navbar-logout:hover {
+    background-color: var(--primary-dark);
+}
+
+/* ==================== */
+/* 5. CARDS STATISTIQUES */
+/* ==================== */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.stat-card {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    padding: 1.25rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--gray-200);
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.stat-card-icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.75rem;
+}
+
+.stat-card-icon-blue {
+    background-color: #dbeafe;
+    color: #1e40af;
+}
+
+.stat-card-icon-green {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.stat-card-icon-purple {
+    background-color: #ede9fe;
+    color: #5b21b6;
+}
+
+.stat-card-title {
+    font-size: 0.875rem;
+    color: var(--gray-500);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.stat-card-value {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: var(--gray-800);
+    margin-bottom: 0.75rem;
+}
+
+.stat-card-trend {
+    display: flex;
+    align-items: center;
+    font-size: 0.875rem;
+}
+
+.stat-card-trend-up {
+    color: var(--success-color);
+}
+
+.stat-card-trend-down {
+    color: var(--danger-color);
+}
+
+.stat-card-trend-neutral {
+    color: var(--gray-500);
+}
+
+/* ==================== */
+/* DISTRIBUTION DES NOTES - STYLE AMÉLIORÉ */
+/* ==================== */
+.rating-distribution-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.rating-stars {
+    width: 100px;
+    display: flex;
+    gap: 2px;
+}
+
+.rating-bar-container {
+    flex: 1;
+    height: 8px;
+    background-color: var(--gray-200);
+    border-radius: 9999px;
+    overflow: hidden;
+}
+
+.rating-bar-fill {
+    height: 100%;
+    border-radius: 9999px;
+    transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.rating-percentage {
+    width: 40px;
+    text-align: right;
+    font-weight: 600;
+    color: var(--gray-800);
+    font-size: 0.875rem;
+}
+
+/* Couleurs par note */
+.rating-5 .rating-bar-fill {
+    background-color: #10b981;
+}
+
+/* vert */
+.rating-4 .rating-bar-fill {
+    background-color: #3b82f6;
+}
+
+/* bleu */
+.rating-3 .rating-bar-fill {
+    background-color: #f59e0b;
+}
+
+/* jaune/orange */
+.rating-2 .rating-bar-fill {
+    background-color: #f97316;
+}
+
+/* orange foncé */
+.rating-1 .rating-bar-fill {
+    background-color: #ef4444;
+}
+
+/* rouge */
+/* ==================== */
+/* DISTRIBUTION DES NOTES */
+/* ==================== */
+
+#ratingDistribution {
+    padding: 0.5rem 0;
+}
+
+#ratingDistribution>div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.rating-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.rating-label {
+    width: 60px;
+    font-weight: 500;
+    color: var(--gray-700);
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.rating-stars {
+    color: var(--gray-400);
+    font-size: 0.875rem;
+}
+
+.rating-percentage {
+    min-width: 40px;
+    text-align: right;
+    font-weight: 600;
+    color: var(--gray-800);
+}
+
+.rating-bar-container {
+    flex: 1;
+    height: 8px;
+    background-color: var(--gray-200);
+    border-radius: 9999px;
+    overflow: hidden;
+}
+
+.rating-bar-fill {
+    height: 100%;
+    border-radius: 9999px;
+    transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Couleurs par note */
+.rating-5 .rating-bar-fill {
+    background-color: #10b981;
+}
+
+/* vert */
+.rating-4 .rating-bar-fill {
+    background-color: #3b82f6;
+}
+
+/* bleu */
+.rating-3 .rating-bar-fill {
+    background-color: #f59e0b;
+}
+
+/* jaune/orange */
+.rating-2 .rating-bar-fill {
+    background-color: #f97316;
+}
+
+/* orange foncé */
+.rating-1 .rating-bar-fill {
+    background-color: #ef4444;
+}
+
+/* rouge */
+
+/* ==================== */
+/* TABLEAUX DE DONNÉES —  */
+/* ==================== */
+
+.data-table-container {
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--gray-200);
+    transition: box-shadow 0.3s ease;
+}
+
+.data-table-container:hover {
+    box-shadow: 0 6px 20px -4px rgba(0, 0, 0, 0.08);
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.925rem;
+    color: var(--gray-800);
+}
+
+.data-table th {
+    font-weight: 600;
+    color: var(--gray-700);
+    padding: 0.875rem 1rem;
+    text-align: left;
+    background-color: var(--gray-50);
+    font-size: 0.8125rem;
+    /* 13px */
+    text-transform: uppercase;
+    letter-spacing: 0.75px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.data-table td {
+    padding: 0.875rem 1rem;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--gray-100);
+    transition: background-color 0.15s ease;
+}
+
+.data-table tr:last-child td {
+    border-bottom: none;
+}
+
+.data-table tr:hover {
+    background-color: #fdfcfb;
+    /* Crème café très douce */
+}
+
+/* === Actions (icônes) === */
+.data-table-actions {
+    display: flex;
+    gap: 0.625rem;
+    justify-content: flex-start;
+}
+
+.data-table-action-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background-color: var(--gray-100);
+    color: var(--gray-600);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid transparent;
+    font-size: 0.9rem;
+}
+
+.data-table-action-btn:hover {
+    background-color: white;
+    border-color: var(--gray-300);
+    color: var(--gray-800);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.data-table-delete-btn {
+    background-color: #fef2f2;
+    color: #ef4444;
+    border-color: #fecaca;
+}
+
+.data-table-delete-btn:hover {
+    background-color: #fee2e2;
+    border-color: #fca5a5;
+    color: #b91c1c;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}
+
+/* === Responsive : mobile & tablette === */
+@media (max-width: 768px) {
+
+    .data-table th,
+    .data-table td {
+        padding: 0.75rem 0.75rem;
+        font-size: 0.875rem;
+    }
+
+    .data-table th {
+        font-size: 0.75rem;
+        letter-spacing: 0.5px;
+    }
+
+    .data-table-action-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 0.85rem;
+    }
+
+    /* Amélioration pour les petits écrans : éviter le débordement */
+    .data-table-container {
+        margin: 0 -1rem 1.5rem;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+    }
+
+    .main-content {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+/* === Éléments spécifiques pour "Performance par table" === */
+#tablePerformanceBody tr td:first-child {
+    font-weight: 600;
+    color: var(--gray-900);
+}
+
+#tablePerformanceBody tr td:nth-child(2) {
+    color: var(--gray-600);
+    font-weight: 500;
+}
+
+#tablePerformanceBody .fas {
+    font-size: 0.9rem;
+}
+
+/* ==================== */
+/* 7. CONTENU DES ONGLETS */
+/* ==================== */
+.tab-content {
+    display: none;
+    padding: 1.25rem;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* ==================== */
+/* 8. FILTRES ET RECHERCHE */
+/* ==================== */
+.filters-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.search-container {
+    position: relative;
+    flex: 1;
+    min-width: 300px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gray-400);
+}
+
+.search-input {
+    width: 90%;
+    padding-left: 2.5rem;
+    padding-right: 1rem;
+    border-radius: 0.375rem;
+    border: 1px solid var(--gray-300);
+    background-color: white;
+    height: 2.5rem;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(212, 167, 106, 0.2);
+}
+
+.filter-select {
+    border-radius: 0.375rem;
+    border: 1px solid var(--gray-300);
+    background-color: white;
+    padding: 0.5rem 1rem;
+    height: 2.5rem;
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(212, 167, 106, 0.2);
+}
+
+.export-btn {
+    background-color: var(--primary-color);
+    color: rgb(237, 237, 237);
+    border-radius: 0.375rem;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s ease;
+    height: 2.5rem;
+    white-space: nowrap;
+}
+
+.export-btn:hover {
+    background-color: var(--primary-dark);
+}
+
+/* ==================== */
+/* 9. TABLEAUX DE DONNÉES */
+/* ==================== */
+.data-table-container {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table th {
+    font-weight: 600;
+    color: var(--gray-600);
+    padding: 0.75rem;
+    border-bottom: 2px solid var(--gray-200);
+    text-align: left;
+    background-color: var(--gray-50);
+}
+
+.data-table td {
+    padding: 0.75rem;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--gray-100);
+}
+
+.data-table tr:hover {
+    background-color: var(--gray-50);
+}
+
+.data-table tr:last-child td {
+    border-bottom: none;
+}
+
+.data-table-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.data-table-action-btn {
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem;
+    background-color: var(--gray-100);
+    color: var(--gray-700);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.data-table-action-btn:hover {
+    background-color: var(--gray-200);
+}
+
+.data-table-delete-btn {
+    background-color: #fef2f2;
+    color: #b91c1c;
+}
+
+.data-table-delete-btn:hover {
+    background-color: #fee2e2;
+}
+
+/* Conteneur principal */
+.pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.pagination-info {
+    font-size: 0.875rem;
+    color: var(--gray-500);
+}
+
+.pagination-btn {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 0.375rem;
+    border: 1px solid var(--gray-300);
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.pagination-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.pagination-btn:hover:not([disabled]) {
+    background-color: var(--gray-100);
+    cursor: pointer;
+}
+
+/* --------------------- */
+#paginationNumbers {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 2px;
+    padding: 8px 12px;
+    background: rgb(173, 101, 0);
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e5e5;
+}
+
+/* Boutons de page */
+#paginationNumbers button {
+    min-width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #4B5563;
+    background: white;
+    border: 1px solid #D1D5DB;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover : effet de fond et léger agrandissement */
+#paginationNumbers button:hover:not(:disabled) {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 14px rgba(251, 146, 60, 0.15);
+    border-color: #FB923C;
+    color: #FB923C;
+    z-index: 10;
+}
+
+/* Bouton actif (page courante) */
+#paginationNumbers button.bg-amber-700 {
+    background: #FB923C;
+    border-color: #FB923C;
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(251, 146, 60, 0.25);
+}
+
+/* Effet de rebond doux quand on clique */
+#paginationNumbers button:active {
+    transform: translateY(0) scale(0.98);
+    transition: transform 0.1s ease;
+}
+
+/* Boutons Précédent / Suivant */
+#paginationNumbers button[disabled] {
+    opacity: 0.4;
+    cursor: not-allowed;
+    color: #9CA3AF;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* Style des points de suspension */
+#paginationNumbers span {
+    color: #9CA3AF;
+    font-size: 0.95rem;
+    font-weight: 500;
+    user-select: none;
+    padding: 0 4px;
+}
+
+/* Responsive : adaptation sur petits écrans */
+@media (max-width: 640px) {
+    #paginationNumbers {
+        gap: 4px;
+        padding: 6px 8px;
+        flex-wrap: wrap;
+    }
+
+    #paginationNumbers button {
+        min-width: 36px;
+        height: 36px;
+        font-size: 0.85rem;
+    }
+
+    #paginationNumbers span {
+        font-size: 0.85rem;
+    }
+}
+
+/* ==================== */
+/* 12. MOTS-CLÉS FRÉQUENTS */
+/* ==================== */
+.keywords-container {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--gray-200);
+}
+
+.keywords-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.keywords-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+}
+
+.keyword-category {
+    background-color: var(--gray-50);
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+}
+
+.keyword-category-header {
+    font-weight: 600;
+    color: var(--gray-700);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.keywords-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.keyword-tag {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.keyword-tag:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.keyword-positive {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.keyword-neutral {
+    background-color: #f3f4f6;
+    color: #4b5563;
+}
+
+.keyword-negative {
+    background-color: #fef2f2;
+    color: #b91c1c;
+}
+
+.keyword-count {
+    font-weight: 500;
+    margin-left: 0.25rem;
+}
+
+/* ==================== */
+/* 13. ALERTES          */
+/* ==================== */
+.alerts-container {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--gray-200);
+}
+
+.alert-card {
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    display: flex;
+    transition: all 0.2s ease;
+    margin-bottom: 0.75rem;
+    border-left: 4px solid;
+}
+
+.alert-card:last-child {
+    margin-bottom: 0;
+}
+
+.alert-card:hover {
+    transform: translateX(5px);
+}
+
+.alert-card-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px;
+    margin-right: 0.75rem;
+}
+
+.alert-card-icon-red {
+    background-color: #fef2f2;
+    color: #b91c1c;
+}
+
+.alert-card-icon-yellow {
+    background-color: #fffbeb;
+    color: #d97706;
+}
+
+.alert-card-icon-gray {
+    background-color: #f3f4f6;
+    color: #4b5563;
+}
+
+.alert-card-icon-green {
+    background-color: #f0fdf4;
+    color: #047857;
+}
+
+.alert-card-content {
+    flex: 1;
+}
+
+.alert-card-title {
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.alert-card-message {
+    font-size: 0.875rem;
+    color: var(--gray-600);
+    margin-bottom: 0.5rem;
+}
+
+.alert-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+}
+
+.alert-card-mark {
+    color: var(--primary-color);
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.alert-card-mark:hover {
+    text-decoration: underline;
+}
+
+.alert-card-read {
+    opacity: 0.7;
+}
+
+/* ==================== */
+/* 14. MODAL DE CONNEXION */
+/* ==================== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+}
+
+.modal-content {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    max-width: 28rem;
+    padding: 1.5rem;
+}
+
+.modal-header {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--gray-800);
+    margin-bottom: 1.5rem;
+}
+
+.modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.modal-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.modal-form-label {
+    font-weight: 500;
+    color: var(--gray-700);
+}
+
+.modal-form-input {
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    border: 1px solid var(--gray-300);
+    background-color: white;
+}
+
+.modal-form-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(212, 167, 106, 0.2);
+}
+
+.modal-form-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.modal-form-cancel {
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    border: 1px solid var(--gray-300);
+    background-color: white;
+    transition: background-color 0.3s ease;
+}
+
+.modal-form-cancel:hover {
+    background-color: var(--gray-100);
+}
+
+.modal-form-submit {
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    background-color: var(--primary-color);
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.modal-form-submit:hover {
+    background-color: var(--primary-dark);
+}
+
+/* ==================== */
+/* 15. LOADING SPINNER  */
+/* ==================== */
+.loading-spinner {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(212, 167, 106, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ==================== */
+/* 16. RESPONSIVE DESIGN */
+/* ==================== */
+
+@media (max-width: 1024px) {
+    .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .trend-container {
+        flex-direction: column;
+    }
+
+    .trend-chart-container {
+        height: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0.5rem 1rem;
+    }
+
+    .navbar-brand-text {
+        display: none;
+    }
+
+    .navbar-user-name {
+        display: inline;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .filters-container {
+        flex-direction: column;
+    }
+
+    .trend-container {
+        padding: 1rem;
+    }
+
+    .trend-chart-container {
+        height: 180px;
+    }
+
+    .trend-analysis {
+        margin-top: 1rem;
+    }
+
+    .keywords-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .pagination {
+        gap: 0;
+    }
+
+    .pagination-btn {
+        width: 1.75rem;
+        height: 1.75rem;
+        font-size: 0.75rem;
+    }
+
+    .trend-x-axis-label {
+        font-size: 0.65rem;
+    }
+}

@@ -1,13 +1,26 @@
 <!DOCTYPE html>
 <html lang="fr">
+<<<<<<< HEAD
+=======
+
+>>>>>>> cfcb295429da9ce9ba549af75919b3215a049b60
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tableau de bord - Café Feedback</title>
+<<<<<<< HEAD
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+=======
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css  ">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js  "></script>
+
+</head>
+
+>>>>>>> cfcb295429da9ce9ba549af75919b3215a049b60
 <body>
     <!-- Vue admin - Tableau de bord -->
     <div id="adminView" class="container mx-auto px-4 py-8">
@@ -31,6 +44,7 @@
             </div>
         </nav>
 
+<<<<<<< HEAD
         <!-- Stats Cards -->
         <div class="stats-grid">
             <div class="stat-card">
@@ -213,13 +227,317 @@
                     <div class="text-center py-8">
                         <div class="loading-spinner mb-2"></div>
                         <p>Chargement des alertes...</p>
+=======
+        <div class="main-content">
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-card-icon stat-card-icon-blue">
+                        <i class="fas fa-star text-blue-500"></i>
+                    </div>
+                    <p class="stat-card-title">Note moyenne</p>
+                    <h3 id="avgRating" class="stat-card-value">0.0</h3>
+                    <div class="stat-card-trend stat-card-trend-neutral">
+                        En attente de données
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-card-icon stat-card-icon-green">
+                        <i class="fas fa-comments text-green-500"></i>
+                    </div>
+                    <p class="stat-card-title">Total avis</p>
+                    <h3 id="totalFeedbacks" class="stat-card-value">0</h3>
+                    <div class="stat-card-trend stat-card-trend-neutral">
+                        En attente de données
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-card-icon stat-card-icon-purple">
+                        <i class="fas fa-smile text-purple-500"></i>
+                    </div>
+                    <p class="stat-card-title">Avis positifs</p>
+                    <h3 id="positiveFeedbacks" class="stat-card-value">0%</h3>
+                    <div class="stat-card-trend stat-card-trend-neutral">
+                        En attente de données
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-card-icon stat-card-icon-purple">
+                        <i class="fas fa-calendar-week text-purple-500"></i>
+                    </div>
+                    <p class="stat-card-title">Avis cette semaine</p>
+                    <h3 id="weeklyFeedbacks" class="stat-card-value">0</h3>
+                    <div class="stat-card-trend stat-card-trend-neutral">
+                        En attente de données
+                    </div>
+                </div>
+            </div>
+
+            <!-- Onglets -->
+            <div class="tabs-container">
+                <div class="tabs-header">
+                    <button class="tab-btn active" data-tab="reviews">
+                        <i class="fas fa-comments"></i> Avis clients
+                    </button>
+                    <button class="tab-btn" data-tab="stats">
+                        <i class="fas fa-chart-bar"></i> Statistiques
+                    </button>
+                    <button class="tab-btn" data-tab="alerts">
+                        <i class="fas fa-exclamation-triangle"></i> Alertes
+                        <span id="alertCount" class="tab-alert-count">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Contenu des onglets -->
+            <div id="reviews" class="tab-content active">
+                <!-- Filtres -->
+                <div class="filters-container">
+                    <div class="search-container">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="searchFeedback" placeholder="Rechercher..." class="search-input">
+                    </div>
+                    <div class="flex space-x-2">
+                        <select id="filterRating" class="filter-select">
+                            <option value="">Toutes les notes</option>
+                            <option value="5">5 étoiles</option>
+                            <option value="4">4 étoiles</option>
+                            <option value="3">3 étoiles</option>
+                            <option value="2">2 étoiles</option>
+                            <option value="1">1 étoile</option>
+                        </select>
+                        <select id="filterTable" class="filter-select">
+                            <option value="">Toutes les tables</option>
+                            <option value="1">Table 1</option>
+                            <option value="2">Table 2</option>
+                            <option value="3">Table 3</option>
+                            <option value="4">Table 4</option>
+                            <option value="5">Table 5</option>
+                        </select>
+                    </div>
+                    <button id="exportFeedback" class="export-btn">
+                        <i class="fas fa-file-export"></i> Exporter
+                    </button>
+                </div>
+
+                <!-- Tableau des avis -->
+                <div class="data-table-container">
+                    <div class="overflow-x-auto">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Table</th>
+                                    <th>Note</th>
+                                    <th>Client</th>
+                                    <th>Commentaire</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="feedbackTableBody">
+                                <tr>
+                                    <td colspan="6" class="text-center py-4">
+                                        <div class="loading-spinner"></div>
+                                        <p>Chargement des avis...</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination-container">
+                    <div class="pagination-info">
+                        Affichage de <span id="startCount">0</span> à <span id="endCount">0</span> sur <span
+                            id="totalCount">0</span> avis
+                    </div>
+
+                    <div id="paginationNumbers" class="flex items-center space-x-1 mt-6">
+
+                        <!-- Pagination générée dynamiquement ici -->
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="stats" class="tab-content">
+                <!-- Filtres -->
+                <div class="filters-container">
+                    <div class="flex space-x-2">
+                        <select id="statsPeriod" class="filter-select">
+                            <option value="week">Cette semaine</option>
+                            <option value="month">Ce mois</option>
+                            <option value="year">Cette année</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- Distribution des notes -->
+                <div class="data-table-container">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Distribution des notes</h3>
+                        <div class="space-y-4" id="ratingDistribution">
+                            <div class="text-center py-6">
+                                <div class="inline-block mb-2">
+                                    <div class="loading-spinner"></div>
+                                </div>
+                                <p class="text-gray-500 text-sm">Chargement des statistiques...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance par table -->
+                <!-- Performance par table -->
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Table</th>
+                            <th>Nb avis</th>
+                            <th>Note moyenne</th>
+                            <th>Tendance</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablePerformanceBody">
+                        <!-- lignes injectées par JS -->
+                    </tbody>
+                </table>
+                <section class="stats-section">
+                    <h2>Évolution hebdomadaire des avis</h2>
+                    <canvas id="weeklyTrendChart"></canvas>
+                </section>
+                <!-- Mots-clés fréquents -->
+                <div class="keywords-container mt-6">
+                    <div class="keywords-header">
+                        <h3 class="text-xl font-bold text-gray-800">Mots-clés fréquents</h3>
+                        <div class="flex space-x-3">
+                            <select id="keywordsPeriod" class="filter-select">
+                                <option value="week">Cette semaine</option>
+                                <option value="month">Ce mois</option>
+                                <option value="year">Cette année</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="keywords-grid">
+                        <!-- Catégorie Positive -->
+                        <div class="keyword-category">
+                            <div class="keyword-category-header text-green-700">
+                                <i class="fas fa-thumbs-up"></i>
+                                Points positifs
+                            </div>
+                            <div class="keywords-list" id="positiveKeywords">
+                                <div class="text-center py-4">
+                                    <div class="loading-spinner"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Catégorie Neutre -->
+                        <div class="keyword-category">
+                            <div class="keyword-category-header text-gray-700">
+                                <i class="fas fa-comment"></i>
+                                Commentaires neutres
+                            </div>
+                            <div class="keywords-list" id="neutralKeywords">
+                                <div class="text-center py-4">
+                                    <div class="loading-spinner"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Catégorie Négative -->
+                        <div class="keyword-category">
+                            <div class="keyword-category-header text-red-700">
+                                <i class="fas fa-thumbs-down"></i>
+                                Points à améliorer
+                            </div>
+                            <div class="keywords-list" id="negativeKeywords">
+                                <div class="text-center py-4">
+                                    <div class="loading-spinner"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="alerts" class="tab-content">
+                <!-- Filtres -->
+                <div class="filters-container">
+                    <div class="flex space-x-2">
+                        <select id="alertsPeriod" class="filter-select">
+                            <option value="today">Aujourd'hui</option>
+                            <option value="week">Cette semaine</option>
+                            <option value="month">Ce mois</option>
+                        </select>
+                    </div>
+                    <button id="markAllAsRead" class="export-btn">
+                        <i class="fas fa-check-double mr-1"></i> Marquer tout comme lu
+                    </button>
+                </div>
+
+                <!-- Alertes -->
+                <div class="alerts-container">
+                    <div id="alertsContainer" class="space-y-3">
+                        <div class="text-center py-8">
+                            <div class="loading-spinner mb-2"></div>
+                            <p>Chargement des alertes...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination-container">
+                    <div class="pagination-info">
+                        Affichage de <span id="startAlertCount">0</span> à <span id="endAlertCount">0
+
+                        </span> sur
+                        <span id="totalAlertCount">0</span> alertes
+                    </div>
+                    <div class="pagination" id="alertPagination">
+                        <!-- Généré dynamiquement -->
+>>>>>>> cfcb295429da9ce9ba549af75919b3215a049b60
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+<<<<<<< HEAD
     <!-- Scripts -->
     <script src="../js/dashboard.js"></script>
 </body>
+=======
+    <!-- Modal de connexion -->
+    <div id="loginModal" class="modal-overlay">
+        <div class="modal-content">
+            <h2 class="modal-header">Connexion Administrateur</h2>
+            <form id="loginForm" class="modal-form">
+                <div class="modal-form-group">
+                    <label for="username" class="modal-form-label">Nom d'utilisateur</label>
+                    <input type="text" id="username" class="modal-form-input" placeholder="admin">
+                </div>
+                <div class="modal-form-group">
+                    <label for="password" class="modal-form-label">Mot de passe</label>
+                    <input type="password" id="password" class="modal-form-input" placeholder="admin">
+                </div>
+                <div class="modal-form-actions">
+                    <button type="button" id="cancelLoginBtn" class="modal-form-cancel">
+                        Annuler
+                    </button>
+                    <button type="submit" class="modal-form-submit">
+                        Se connecter
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+>>>>>>> cfcb295429da9ce9ba549af75919b3215a049b60
 </html>
